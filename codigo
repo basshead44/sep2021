@@ -1,0 +1,189 @@
+from selenium import webdriver
+from selenium_stealth import stealth
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support.ui import Select
+from selenium.common.exceptions import NoSuchElementException
+import pandas as pd
+import time
+import datetime
+
+begin_time = datetime.datetime.now()
+
+xpath = '/html/body/onpe-root/onpe-layout-container/onpe-onpe-actas-nume/form/div/div[6]/div/table'
+xpath2 = '/html/body/onpe-root/onpe-layout-container/onpe-onpe-actas-nume/form/div/div[3]/div[1]/div/div[1]/div[1]/table'
+xpath3 = '/html/body/onpe-root/onpe-layout-container/onpe-onpe-actas-nume/form/div/div[3]/div[1]/div/div[2]/div/a'
+
+options = webdriver.ChromeOptions()
+options.add_argument("--headless")
+options.add_experimental_option("excludeSwitches", ["enable-automation"])
+options.add_experimental_option('useAutomationExtension', False)
+driver = webdriver.Chrome(options=options, executable_path=r"chromedriver.exe")
+
+stealth(driver,
+        languages=["en-US", "en"],
+        vendor="Google Inc.",
+        platform="Win32",
+        webgl_vendor="Intel Inc.",
+        renderer="Intel Iris OpenGL Engine",
+        fix_hairline=True,
+        )
+
+datos = []
+datos2 = []
+datos3 = []
+datos4 = []
+ubi ="https://www.resultadossep.eleccionesgenerales2021.pe/SEP2021/Actas/Numero/"
+for i in range(0,10):
+    try:
+        ubi_link='00000'+str(i)
+        driver.get(ubi+'00000'+str(i))
+        driver.maximize_window()
+        driver.implicitly_wait(1)
+        tabla1 = driver.find_element_by_xpath(xpath)
+        tabla1 = tabla1.get_attribute("innerText")
+        tabla2 = driver.find_element_by_xpath(xpath2)
+        tabla2 = tabla2.get_attribute("innerText")
+        link = driver.find_element_by_xpath(xpath3)
+        link = link.get_attribute("href")
+        print(tabla1)
+        datos.append(tabla1)
+        datos2.append(tabla2)
+        datos3.append(link)
+        datos4.append(ubi_link)
+        
+    except NoSuchElementException:
+        print ("error en", i)
+dframe = pd.DataFrame(datos)  
+dframe["tabla1"] = datos
+dframe["tabla2"] = datos2
+dframe["link"] = datos3
+dframe["acta"] = datos4
+dframe.to_excel("actas10.xlsx")
+datos = []
+datos2 = []
+datos3 = []
+datos4 = []    
+for i in range(10,100):    
+    try:
+        ubi_link='0000'+str(i)
+        driver.get(ubi+'0000'+str(i))
+        driver.maximize_window()
+        driver.implicitly_wait(1)
+        tabla1 = driver.find_element_by_xpath(xpath)
+        tabla1 = tabla1.get_attribute("innerText")
+        tabla2 = driver.find_element_by_xpath(xpath2)
+        tabla2 = tabla2.get_attribute("innerText")
+        link = driver.find_element_by_xpath(xpath3)
+        link = link.get_attribute("href")
+        print(tabla1)
+        datos.append(tabla1)
+        datos2.append(tabla2)
+        datos3.append(link)
+        datos4.append(ubi_link)
+
+    except NoSuchElementException:
+        print ("error en", i)
+dframe = pd.DataFrame(datos)  
+dframe["tabla1"] = datos
+dframe["tabla2"] = datos2
+dframe["link"] = datos3
+dframe["acta"] = datos4
+dframe.to_excel("actas100.xlsx")
+datos = []
+datos2 = []
+datos3 = []
+datos4 = []
+for i in range(100,1000):    
+    try:
+        ubi_link='000'+str(i)
+        driver.get(ubi+'000'+str(i))
+        driver.maximize_window()
+        driver.implicitly_wait(1)
+        tabla1 = driver.find_element_by_xpath(xpath)
+        tabla1 = tabla1.get_attribute("innerText")
+        tabla2 = driver.find_element_by_xpath(xpath2)
+        tabla2 = tabla2.get_attribute("innerText")
+        link = driver.find_element_by_xpath(xpath3)
+        link = link.get_attribute("href")
+        print(tabla1)
+        datos.append(tabla1)
+        datos2.append(tabla2)
+        datos3.append(link)
+        datos4.append(ubi_link)
+    except NoSuchElementException:
+        print ("error en", i)        
+dframe = pd.DataFrame(datos)  
+dframe["tabla1"] = datos
+dframe["tabla2"] = datos2
+dframe["link"] = datos3
+dframe["acta"] = datos4
+dframe.to_excel("actas1000.xlsx")
+datos = []
+datos2 = []
+datos3 = []
+datos4 = []        
+for i in range(1000,10000):   
+    try:
+        ubi_link='00'+str(i)
+        driver.get(ubi+'00'+str(i))
+        driver.maximize_window()
+        driver.implicitly_wait(1)
+        tabla1 = driver.find_element_by_xpath(xpath)
+        tabla1 = tabla1.get_attribute("innerText")
+        tabla2 = driver.find_element_by_xpath(xpath2)
+        tabla2 = tabla2.get_attribute("innerText")
+        link = driver.find_element_by_xpath(xpath3)
+        link = link.get_attribute("href")
+        print(tabla1)
+        datos.append(tabla1)
+        datos2.append(tabla2)
+        datos3.append(link)
+        datos4.append(ubi_link)
+    except NoSuchElementException:
+        print ("error en", i)         
+dframe = pd.DataFrame(datos)  
+dframe["tabla1"] = datos
+dframe["tabla2"] = datos2
+dframe["link"] = datos3
+dframe["acta"] = datos4
+dframe.to_excel("actas10000.xlsx")
+datos = []
+datos2 = []
+datos3 = []
+datos4 = [] 
+for i in range(10000,100000): 
+    try:
+        ubi_link='0'+str(i)
+        driver.get(ubi+'0'+str(i))
+        driver.maximize_window()
+        driver.implicitly_wait(2)
+        tabla1 = driver.find_element_by_xpath(xpath)
+        tabla1 = tabla1.get_attribute("innerText")
+        tabla2 = driver.find_element_by_xpath(xpath2)
+        tabla2 = tabla2.get_attribute("innerText")
+        link = driver.find_element_by_xpath(xpath3)
+        link = link.get_attribute("href")
+        print(tabla1)
+        datos.append(tabla1)
+        datos2.append(tabla2)
+        datos3.append(link)
+        datos4.append(ubi_link)
+    except NoSuchElementException:
+        print ("error en", i)           
+dframe = pd.DataFrame(datos)  
+dframe["tabla1"] = datos
+dframe["tabla2"] = datos2
+dframe["link"] = datos3
+dframe["acta"] = datos4
+dframe.to_excel("actas100000.xlsx")
+datos = []
+datos2 = []
+datos3 = []
+datos4 = []        
+
+driver.quit()
+
+print(datetime.datetime.now())
+print(datetime.datetime.now() - begin_time)
